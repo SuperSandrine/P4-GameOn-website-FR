@@ -75,6 +75,13 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
+    color: #ff0000;
+  }
+  .topnav a.active {
+    color: #ffffff;
+  }
+  .topnav a.icon {
+    color: #ffffff;
   }
 }
 
@@ -101,7 +108,10 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    color: #ff0000;
+  }
+  .topnav a.icon:hover {
+    color: #ffffff;
   }
 }
 
@@ -170,6 +180,11 @@ main {
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
 }
+@media screen and (max-width: 540px) {
+  .bground {
+    background-color: transparent;
+  }
+}
 
 .content {
   margin: 5% auto;
@@ -184,6 +199,41 @@ main {
   color: #fff;
   padding-top: 10px;
 }
+@media screen and (max-width: 540px) {
+  .content {
+    margin-top: 87px;
+  }
+}
+
+.modal-confirmation {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  bottom: 0;
+  color: #fff;
+  padding-top: 10px;
+  font-size: 25px;
+  display: none;
+  margin: auto;
+  text-align: center;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 15px 8%;
+  margin: 15px auto;
+  min-height: 80vh;
+}
+@media screen and (max-width: 540px) {
+  .modal-confirmation {
+    min-height: 90vh;
+  }
+}
+
+/* button.modal-confirmation-close {
+  align-self: flex-end;
+}
+h4 {
+  align-self: stretch;
+} */
 
 .modal-body {
   padding: 15px 8%;
@@ -192,7 +242,7 @@ main {
 
 label {
   font-family: var(--font-default);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: normal;
   display: inline-block;
   margin-bottom: 11px;
@@ -202,7 +252,9 @@ input {
   border: 0.8px solid #ccc;
   outline: none;
 }
+
 .text-control {
+  /* input shape */
   margin: 0;
   padding: 8px;
   width: 100%;
@@ -212,21 +264,16 @@ input {
 }
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: 0.4em;
+  font-size: 0.6em;
   color: #e54858;
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
   text-align: right;
-  line-height: 0.3;
+  line-height: 0.9;
   opacity: 0;
   transition: 0.3s;
 }
-.error {
-  background-color: #f00;
-}
-/* classe made by Sandrine,TODO: to remove once true style applied*/
-
 .formData[data-error-visible="true"]::after {
   opacity: 1;
 }
@@ -411,6 +458,7 @@ input[data-error]::after {
 .text-label {
   font-weight: normal;
   font-size: 16px;
+  margin-bottom: 0;
 }
 .hero-section {
   min-height: 93vh;
@@ -532,5 +580,14 @@ footer {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes modalconfirm {
+  from {
+    transform: scale (0, 0), translateY(-150px);
+  }
+  to {
+    transform: scale(1.1);
   }
 }

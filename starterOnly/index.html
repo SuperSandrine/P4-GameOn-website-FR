@@ -46,27 +46,32 @@
             réservations... Places limitées !
           </p>
           <button class="btn-signup modal-btn">je m'inscris</button>
-          <!-- Ouvre la modale pour s'inscrire en desktop-->
+          <!-- Modal opener in desktop mode-->
         </div>
         <div class="hero-img">
           <img src="./bg_img.jpg" alt="img" />
         </div>
         <button class="btn-signup modal-btn">je m'inscris</button>
-        <!-- Ouvre la modale pour s'inscrire en mobile-->
+        <!-- Modal opener in mobile mode-->
       </div>
 
       <!-- ****************** Beginning of MODAL inscription ********************-->
       <div class="bground">
         <div class="content">
           <span class="closeModal"></span>
+          <div class="modal-confirmation">
+            <h4> Merci, votre inscription est enregistrée.</h4>
+            <button class="btn-submit modal-btn modal-confirmation-close">Fermer</button>
+          </div>
           <div class="modal-body">
             <form
+              id="reserveForm"
               name="reserve"
               action="index.html"
               method="get"
               onsubmit="return validate();"
             >
-              <div class="formData">
+              <div class="formData" data-error="&nbsp;" >
                 <label for="firstName">Prénom</label><br />
                 <input
                   class="text-control"
@@ -75,11 +80,10 @@
                   name="first"
                   minlength="2"
                 />
-                <small>error message</small>
-                <br />
+                <br/>
               </div>
 
-              <div class="formData">
+              <div class="formData" data-error="&nbsp;">
                 <label for="lastName">Nom</label><br />
                 <input
                   class="text-control"
@@ -88,11 +92,10 @@
                   name="last"
                   minlength="=2"
                 />
-                <small> error message </small>
                 <br />
               </div>
 
-              <div class="formData">
+              <div class="formData" data-error="&nbsp;" >
                 <label for="email">E-mail</label><br />
                 <input
                   class="text-control"
@@ -100,10 +103,9 @@
                   id="email"
                   name="email"
                 />
-                <small> error message</small>
                 <br />
               </div>
-              <div class="formData">
+              <div class="formData" data-error="&nbsp;" >
                 <label for="birthdate">Date de naissance</label><br />
                 <input
                   class="text-control"
@@ -112,7 +114,7 @@
                   name="birthdate"
                 /><br />
               </div>
-              <div class="formData">
+              <div class="formData" data-error="&nbsp;" >
                 <label for="quantity"
                   >À combien de tournois GameOn avez-vous déjà participé
                   ?</label
@@ -124,18 +126,12 @@
                   name="quantity"
                   min="0"
                   max="99"
-                />
+                /> </br>
               </div>
-              <!-- Thomas: Pour la div ci-dessous, parce que je ne trouvais pas ça logique,
-              j'ai transformé <p> en <label> et je l'ai mis dans la div formData et pas avant
-                Est-ce qu'on peut mettre plusieurs éléments dans "for"? -->
-              <div class="formData">
-                <label
-                  for="location1, location2, location3, location4, location5, location6"
-                  class="text-label"
-                >
+              <div class="formData" data-error="&nbsp;" >
+                <p class="text-label">
                   A quel tournoi souhaitez-vous participer cette année ?
-                </label>
+              </p>
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -204,19 +200,24 @@
                 >
               </div>
 
-              <div class="formData">
+              <div class="formData" data-error="&nbsp;" >
                 <input
                   class="checkbox-input"
                   type="checkbox"
                   id="checkboxCGU"
                   checked
+                  required
                 />
-                <label class="checkbox2-label" for="checkboxCGU" required>
+                <label class="checkbox2-label" for="checkboxCGU" >
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br />
-
+                </div>
+                <!-- Div added, to have one checkbox a div, and now 
+                  error message appears while typing just behind the div, it seems
+                  better for the user -->
+                <div class="formData" data-error="&nbsp;" >
                 <input
                   class="checkbox-input"
                   type="checkbox"
@@ -229,16 +230,16 @@
                 <br />
               </div>
               <input
-                class="btn-submit"
+                class="btn-submit button"
                 type="submit"
-                class="button"
                 value="C'est parti"
               />
             </form>
           </div>
+        
         </div>
       </div>
-      <!-- End of modal -->
+    <!--------- End of modal---------->
     </main>
 
     <!-- ****************** FOOTER ********************-->
