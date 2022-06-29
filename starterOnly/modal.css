@@ -222,18 +222,19 @@ main {
   margin: 15px auto;
   min-height: 80vh;
 }
+
+.modal-confirmation div {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 540px) {
   .modal-confirmation {
     min-height: 90vh;
   }
 }
-
-/* button.modal-confirmation-close {
-  align-self: flex-end;
-}
-h4 {
-  align-self: stretch;
-} */
 
 .modal-body {
   padding: 15px 8%;
@@ -580,14 +581,5 @@ footer {
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes modalconfirm {
-  from {
-    transform: scale (0, 0), translateY(-150px);
-  }
-  to {
-    transform: scale(1.1);
   }
 }

@@ -28,7 +28,6 @@
         <a href="#"><span>Contact</span></a>
         <a href="#"><span>Évènements passés</span></a>
         <a href="javascript:void(0);" class="icon" onclick="editNav()">
-          <!-- THOMAS: que veut dire le href ci-dessus -->
           <i class="fa fa-bars"></i>
         </a>
       </div>
@@ -60,8 +59,12 @@
         <div class="content">
           <span class="closeModal"></span>
           <div class="modal-confirmation">
-            <h4> Merci, votre inscription est enregistrée.</h4>
-            <button class="btn-submit modal-btn modal-confirmation-close">Fermer</button>
+            <h4>Merci, votre inscription est enregistrée.</h4>
+            <div>
+              <button class="btn-submit modal-btn modal-confirmation-close">
+                Fermer
+              </button>
+            </div>
           </div>
           <div class="modal-body">
             <form
@@ -71,7 +74,7 @@
               method="get"
               onsubmit="return validate();"
             >
-              <div class="formData" data-error="&nbsp;" >
+              <div class="formData" data-error="&nbsp;">
                 <label for="firstName">Prénom</label><br />
                 <input
                   class="text-control"
@@ -80,7 +83,6 @@
                   name="first"
                   minlength="2"
                 />
-                <br/>
               </div>
 
               <div class="formData" data-error="&nbsp;">
@@ -92,10 +94,9 @@
                   name="last"
                   minlength="=2"
                 />
-                <br />
               </div>
 
-              <div class="formData" data-error="&nbsp;" >
+              <div class="formData" data-error="&nbsp;">
                 <label for="email">E-mail</label><br />
                 <input
                   class="text-control"
@@ -103,22 +104,21 @@
                   id="email"
                   name="email"
                 />
-                <br />
               </div>
-              <div class="formData" data-error="&nbsp;" >
+              <div class="formData" data-error="&nbsp;">
                 <label for="birthdate">Date de naissance</label><br />
                 <input
                   class="text-control"
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                /><br />
+                />
               </div>
-              <div class="formData" data-error="&nbsp;" >
+              <div class="formData" data-error="&nbsp;">
                 <label for="quantity"
                   >À combien de tournois GameOn avez-vous déjà participé
                   ?</label
-                ><br />
+                >
                 <input
                   type="number"
                   class="text-control"
@@ -126,12 +126,12 @@
                   name="quantity"
                   min="0"
                   max="99"
-                /> </br>
+                />
               </div>
-              <div class="formData" data-error="&nbsp;" >
+              <div class="formData" data-error="&nbsp;">
                 <p class="text-label">
                   A quel tournoi souhaitez-vous participer cette année ?
-              </p>
+                </p>
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -200,7 +200,7 @@
                 >
               </div>
 
-              <div class="formData" data-error="&nbsp;" >
+              <div class="formData" data-error="&nbsp;">
                 <input
                   class="checkbox-input"
                   type="checkbox"
@@ -208,16 +208,15 @@
                   checked
                   required
                 />
-                <label class="checkbox2-label" for="checkboxCGU" >
+                <label class="checkbox2-label" for="checkboxCGU">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
-                <br />
-                </div>
-                <!-- Div added, to have one checkbox a div, and now 
+              </div>
+              <!-- Div added, to have one checkbox a div, and now 
                   error message appears while typing just behind the div, it seems
                   better for the user -->
-                <div class="formData" data-error="&nbsp;" >
+              <div class="formData" data-error="&nbsp;">
                 <input
                   class="checkbox-input"
                   type="checkbox"
@@ -227,7 +226,6 @@
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
                 </label>
-                <br />
               </div>
               <input
                 class="btn-submit button"
@@ -236,10 +234,9 @@
               />
             </form>
           </div>
-        
         </div>
       </div>
-    <!--------- End of modal---------->
+      <!--------- End of modal---------->
     </main>
 
     <!-- ****************** FOOTER ********************-->

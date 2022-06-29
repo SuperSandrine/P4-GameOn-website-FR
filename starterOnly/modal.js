@@ -81,7 +81,8 @@ const firstNameChecker = (value) => {
     A = 0;
     // regex control with: https://regex101.com/r/0filKf/1
     // This regex controls two whitespace character (from 2 to 99).
-    // at the beginning of name OR only whitespace OR whitespaces in the middle of name
+    // at the beginning of name OR if the name only have whitespaces
+    // OR whitespaces in the middle of name
   } else if (value == null || value == "" || !value) {
     containerFN.setAttribute("data-error-visible", true);
     containerFN.setAttribute(
@@ -205,8 +206,7 @@ const containerR = document.getElementsByName("location").parentNode;
 let place;
 let checkboxNewsVar = false;
 
-// control of place
-// Once the checkbox is valid, we stock the data in a variable
+// Control of place, once the checkbox is valid, we stock the data in a variable
 inputsRadio.forEach((input) => {
   input.addEventListener("click", (e) => {
     switch (e.target.id) {
@@ -249,8 +249,10 @@ inputsRadio.forEach((input) => {
       default:
         null;
       // due to Radio system, it's either one or another value,
-      // So it's unecessary to add a error message, except in case of an empty submit before,
-      // then, we need to remove the attribute.
+      // So it's unecessary to add an error message, except in
+      // case of an empty box when submited.
+      // So they have an error message after first attempt of submission,
+      // then, we need to remove the error attribute once it's checked.
     }
   });
 });
@@ -286,10 +288,9 @@ inputsCheckbox.forEach((input) => {
 });
 
 //the form should be valid when submit:
-// The submission function is played in the html, in <form>
+// The submission function is played in the html, in <form> "onsubmit" event
 // An additional control is done in the function validate with ABC variables
-// filled earlier
-
+// filled earlier when the input passed checker
 function validate() {
   if (A + B + C + D + E < 5) {
     if (!E) {
@@ -324,8 +325,8 @@ function validate() {
     modalBody.style.display = "none";
     modalConfirmation.style.display = "flex";
     document.querySelector("#reserveForm").reset();
-    // previous part cleans inputs
-    // next part cleans user datas
+    // Previous part cleans inputs.
+    // Next part cleans user datas.
     A = 0;
     B = 0;
     C = 0;
@@ -350,15 +351,13 @@ btnModalConfirmation.addEventListener("click", (e) => {
   modalBody.style.display = "block";
 });
 
-//prevent Default behaviour on validation while coding: modal closing, modal initialisation
-// with click,
-// TODO: to place in the case the form is validated and sent (or to remove
-// if we are no more need to prevent this behavious when code will be ready).
+// Next line prevent default behaviour on submission after validation: modal closing,
+// modal initialisation with click
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 });
 
-// next function avoid the default behavious of navigator and its buble error message.
+// Next function avoid the default behavious of navigator and its buble error message.
 for (var i = 0; i < form.length; i++) {
   form[i].addEventListener(
     "invalid",
