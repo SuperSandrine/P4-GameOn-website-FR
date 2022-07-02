@@ -93,6 +93,7 @@ const firstNameChecker = (value) => {
     firstName = null;
     A = 0;
   } else if (
+    // here are all accepted special characters
     !value.match(
       /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]*$/
     )
@@ -193,6 +194,7 @@ const emailChecker = (value) => {
 // Then, I applied a age function, to calculate the age and control and comment the date of birth
 // accordingly of the conditions behind. Also, those conditions should be specified with the
 // next client meeting.
+// I also created a new style for those tolerated errors
 function getAge(data) {
   var today = new Date();
   var birthDate = new Date(data);
@@ -238,8 +240,6 @@ const birthdateChecker = (value) => {
   }
 };
 
-// No control because it was not a necessary value in specsheet.
-
 const quantityChecker = (value) => {
   if (value < 0 || (value >= 99) | !value) {
     containerQ.setAttribute("data-error-visible", true);
@@ -257,7 +257,8 @@ const quantityChecker = (value) => {
 };
 
 //We can also choose the event "focusout", could be intersting specially when we are setting
-// the date value in the input birthdate.
+// the date value in the input birthdate. But not really for the other input, in my
+// opinion.
 inputsText.forEach((input) => {
   input.addEventListener("input", (e) => {
     switch (e.target.id) {
