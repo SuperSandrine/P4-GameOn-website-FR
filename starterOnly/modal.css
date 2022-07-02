@@ -290,6 +290,25 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
+
+.formData[data-error-small]::after {
+  content: attr(data-error-small);
+  font-size: 0.6em;
+  color: #eec644;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: right;
+  line-height: 0.9;
+  opacity: 0;
+  transition: 0.3s;
+}
+.formData[data-error-small-visible="true"]::after {
+  opacity: 1;
+}
+.formData[data-error-small-visible="true"] .text-control {
+  border: 2px solid #eec644;
+}
 /* 
 input[data-error]::after {
     content: attr(data-error);

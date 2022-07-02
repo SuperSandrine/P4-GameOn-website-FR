@@ -13,6 +13,7 @@ const btnModalConfirmation = document.querySelector(
 // DOM selection of a container whose got the formData class to show the
 // error flag when we are data controling, in order to show the error message
 const containerQ = document.querySelector("#quantity").parentNode;
+const containerB = document.querySelector("#birthdate").parentNode;
 const containerE = document.querySelector("#email").parentNode;
 const containerLN = document.querySelector("#lastName").parentNode;
 const containerFN = document.querySelector(".formData");
@@ -83,6 +84,26 @@ const firstNameChecker = (value) => {
     // This regex controls two whitespace character (from 2 to 99).
     // at the beginning of name OR if the name only have whitespaces
     // OR whitespaces in the middle of name
+  } else if (value.match(/^([0-9]+.)|([0-9]+)|.+([0-9]+)+.$/)) {
+    containerFN.setAttribute("data-error-visible", true);
+    containerFN.setAttribute(
+      "data-error",
+      "Veillez à ne pas entrer de chiffres"
+    );
+    firstName = null;
+    A = 0;
+  } else if (
+    !value.match(
+      /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]*$/
+    )
+  ) {
+    containerFN.setAttribute("data-error-visible", true);
+    containerFN.setAttribute(
+      "data-error",
+      "Veillez à ne pas entrer de caractères spéciaux non-autorisés."
+    );
+    firstName = null;
+    A = 0;
   } else if (value == null || value == "" || !value) {
     containerFN.setAttribute("data-error-visible", true);
     containerFN.setAttribute(
@@ -115,6 +136,26 @@ const lastNameChecker = (value) => {
     );
     lastName = null;
     B = 0;
+  } else if (value.match(/^([0-9]+.)|([0-9]+)|.+([0-9]+)+.$/)) {
+    containerLN.setAttribute("data-error-visible", true);
+    containerLN.setAttribute(
+      "data-error",
+      "Veillez à ne pas entrer de chiffres"
+    );
+    firstName = null;
+    A = 0;
+  } else if (
+    !value.match(
+      /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]*$/
+    )
+  ) {
+    containerLN.setAttribute("data-error-visible", true);
+    containerLN.setAttribute(
+      "data-error",
+      "Veillez à ne pas entrer de caractères spéciaux non-autorisés."
+    );
+    firstName = null;
+    A = 0;
   } else if (value.match(/^((\s{2,99})+.)|(\s{2,99})|.+(\s{2,99})+.$/)) {
     containerLN.setAttribute("data-error-visible", true);
     containerLN.setAttribute(
@@ -147,9 +188,56 @@ const emailChecker = (value) => {
 };
 // email regex from : https://regexr.com/3e48o
 
+// I found and edited this regex for the birthdate, but I wasn't fully convinced
+// mainly with the years setting : regex age: /^(((0)[0-9])|((1)[0-2])|)(\/|.|-)([0-2][0-9]|(3)[0-1])(\/|.|-)([1-2][9,0][0-9][0-9])$/gi
+// Then, I applied a age function, to calculate the age and control and comment the date of birth
+// accordingly of the conditions behind. Also, those conditions should be specified with the
+// next client meeting.
+function getAge(data) {
+  var today = new Date();
+  var birthDate = new Date(data);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}
+
 const birthdateChecker = (value) => {
-  birthday = value;
+  const age = getAge(value);
+  if (age > 100) {
+    containerB.removeAttribute("data-error-small-visible", false);
+    containerB.setAttribute("data-error-small-visible", true);
+    containerB.setAttribute(
+      "data-error-small",
+      "Vous avez au-delà de 100 ans !  Vérifiez votre âge mais ce critère n'est pas obligatoire."
+    );
+    birthday = value;
+  } else if (age >= 0 && age < 3) {
+    containerB.removeAttribute("data-error-small-visible", false);
+    containerB.setAttribute("data-error-small-visible", true);
+    containerB.setAttribute(
+      "data-error-small",
+      "Vous avez en-deçà de 3 ans ! Vérifiez votre âge mais ce critère n'est pas obligatoire."
+    );
+    birthday = value;
+  } else if (age < 0) {
+    containerB.removeAttribute("data-error-small-visible", false);
+    containerB.setAttribute("data-error-small-visible", true);
+    containerB.setAttribute(
+      "data-error-small",
+      "Vous ne pouvez pas venir du futur ! Vérifiez votre âge mais ce critère n'est pas obligatoire."
+    );
+    birthday = value;
+  } else if (age >= 3) {
+    containerB.removeAttribute("data-error-small-visible", false);
+    birthday = value;
+  } else if ((birthday = !value)) {
+    containerB.removeAttribute("data-error-small-visible", false);
+  }
 };
+
 // No control because it was not a necessary value in specsheet.
 
 const quantityChecker = (value) => {
@@ -168,6 +256,8 @@ const quantityChecker = (value) => {
   }
 };
 
+//We can also choose the event "focusout", could be intersting specially when we are setting
+// the date value in the input birthdate.
 inputsText.forEach((input) => {
   input.addEventListener("input", (e) => {
     switch (e.target.id) {
@@ -186,7 +276,6 @@ inputsText.forEach((input) => {
       case "quantity":
         quantityChecker(e.target.value);
         break;
-
       default:
         null;
     }
@@ -339,6 +428,7 @@ function validate() {
     quantity = null;
     place = null;
     checkboxNewsVar = null;
+    containerB.removeAttribute("data-error-small-visible", false);
     return true;
   } else {
     alert("Il y a un autre problème, contactez l'administrateur du site.");
